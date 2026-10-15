@@ -1,6 +1,6 @@
 
 from langchain_huggingface import HuggingFacePipeline
-
+from langchain_core.prompts import PromptTemplate
 model = HuggingFacePipeline.from_model_id(
     model_id="Qwen/Qwen2.5-0.5B-Instruct",
     task="text-generation",
@@ -10,5 +10,19 @@ model = HuggingFacePipeline.from_model_id(
         "return_full_text": False
     }
 )
-result = model.invoke("What is Python?")
+
+########### static prompt######
+# result = model.invoke("What is Python?")
+# print(result)
+
+
+####### dynamic prompt###
+
+prompt = PromptTemplate.from_template(
+    "What is {topic}?"
+)
+
+chain = prompt | model
+
+result = chain.invoke({"topic": "Machine Learning"})
 print(result)
