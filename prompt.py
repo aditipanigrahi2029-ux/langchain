@@ -19,46 +19,46 @@ model = HuggingFacePipeline.from_model_id(
 )
 
 ########### static prompt######
-# result = model.invoke("What is Python?")
-# print(result)
+result = model.invoke("What is Python?")
+print(result)
 
 
 ####### dynamic prompt###
 
-# prompt = PromptTemplate.from_template(
-#     "What is {topic}?"
-# )
+prompt = PromptTemplate.from_template(
+    "What is {topic}?"
+)
 
-# chain = prompt | model
-# result = chain.invoke({"topic": "Machine Learning"})
-# print(result)
+chain = prompt | model
+result = chain.invoke({"topic": "Machine Learning"})
+print(result)
 
 ######### prompt templeste########
 
-# prompt = PromptTemplate(
-#     input_variables=["topic","lanuage"],
-#     template= "explain {topic} in this {lanuage}"
-# )
-# chain = prompt | model
-# result = chain.invoke({
-#     "topic": "AI",
-#     "lanuage":"Hindi"
-# })
-# print(result)
+prompt = PromptTemplate(
+    input_variables=["topic","lanuage"],
+    template= "explain {topic} in this {lanuage}"
+)
+chain = prompt | model
+result = chain.invoke({
+    "topic": "AI",
+    "lanuage":"Hindi"
+})
+print(result)
 
 ######chatPromptTemplate###
-# prompt = ChatPromptTemplate.from_messages([
-#     ("system", "You are a helpful teacher."),
-#     ("human", "Explain {topic} in simple words.")
-# ])
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful teacher."),
+    ("human", "Explain {topic} in simple words.")
+])
 
-# chain = prompt | model
+chain = prompt | model
 
-# result = chain.invoke({
-#     "topic": "Deep Learning"
-# })
+result = chain.invoke({
+    "topic": "Deep Learning"
+})
 
-# print(result)
+print(result)
 
 ######systemmsg, humanmsg, aimsg###
 messages=[
